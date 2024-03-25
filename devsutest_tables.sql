@@ -11,7 +11,9 @@ COMMENT ON DATABASE devsutest
 
 GRANT ALL ON DATABASE devsutest TO postgres;
 
-
+-- -----------------------------------------------------
+-- Table "persona"
+-- -----------------------------------------------------
 
 CREATE TABLE public.persona
 (
@@ -44,7 +46,9 @@ ALTER TABLE public.cliente_id_cliente_seq OWNER TO postgres;
 ALTER SEQUENCE public.cliente_id_cliente_seq OWNED BY public.cliente.id_cliente;
 ALTER TABLE ONLY public.cliente ALTER COLUMN id_cliente SET DEFAULT nextval('public.cliente_id_cliente_seq'::regclass);
 
-
+-- -----------------------------------------------------
+-- Table "cliente"
+-- -----------------------------------------------------
 CREATE TABLE public.cliente
 (
     identificacion bigint NOT NULL,
@@ -64,7 +68,9 @@ ALTER TABLE IF EXISTS public.cliente
 
 GRANT ALL ON TABLE public.cliente TO postgres;    
 
-
+-- -----------------------------------------------------
+-- Table "tipo_cuenta"
+-- -----------------------------------------------------
 CREATE TABLE public.tipo_cuenta
 (
     "idTipoCuenta" integer NOT NULL,
@@ -83,11 +89,15 @@ COMMENT ON TABLE public.tipo_cuenta
 INSERT INTO public.tipo_cuenta values(1, 'Ahorros');
 INSERT INTO public.tipo_cuenta values(2, 'Dorriente');
 
+-- -----------------------------------------------------
+-- Table "cuenta"
+-- -----------------------------------------------------
 CREATE TABLE public.cuenta
 (	
     numero_cuenta uuid NOT NULL,
     id_tipo_cuenta integer NOT NULL,
     saldo_inicial numeric(16, 2) NOT NULL,
+    saldo_disponible numeric(16, 2) NOT NULL,
     estado integer NOT NULL,
     id_cliente integer NOT NULL,
     PRIMARY KEY (numero_cuenta),
@@ -108,7 +118,9 @@ ALTER TABLE IF EXISTS public.cuenta
 
 GRANT ALL ON TABLE public.cuenta TO postgres;
 
-
+-- -----------------------------------------------------
+-- Table "tipo_movimiento"
+-- -----------------------------------------------------
 CREATE TABLE public.tipo_movimiento
 (
     id_tipo_movimiento integer NOT NULL,
@@ -127,6 +139,9 @@ COMMENT ON TABLE public.tipo_movimiento
 insert into public.tipo_movimiento values (1, 'Credito');
 insert into public.tipo_movimiento values (2, 'Debito');
 
+-- -----------------------------------------------------
+-- Table "movimiento"
+-- -----------------------------------------------------
 CREATE TABLE public.movimiento
 (
 	id_movimiento integer NOT NULL,
