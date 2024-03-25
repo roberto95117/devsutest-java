@@ -1,3 +1,7 @@
+-- -----------------------------------------------------
+-- Database "devsutest"
+-- -----------------------------------------------------
+
 CREATE DATABASE devsutest
     WITH
     OWNER = postgres
